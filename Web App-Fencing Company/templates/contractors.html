@@ -1,0 +1,68 @@
+{% extends "index.html" %}
+
+{% block content %}
+<h2>Contractors</h2>
+<p>This page records the details of the subcontractors who build the fences.</p>
+<table>
+    <thead>
+        <tr>
+            <!-- <th>ContractorID</th> -->
+            <th>Company Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Rating</th>
+            <th>Total Jobs Completed</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for contractor in contractors %}
+        <tr>
+            <!-- <td>{{ contractor.ContractorID }}</td> -->
+            <td>{{ contractor.CompanyName }}</td>
+            <td>{{ contractor.Phone }}</td>
+            <td>{{ contractor.Email }}</td>
+            <td>{{ contractor.Rating }}</td>
+            <td>{{ contractor.TotalJobsCompleted }}</td>
+            <td>
+                <form action="/contractors/delete" method="POST">
+                    <input type="hidden" name="ContractorID" value="{{ contractor.ContractorID }}">
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Add a New Contractor</h3>
+<form method="POST">
+    <table>
+        <tr>
+            <th><label for="companyName">Company Name</label></th>
+            <th><label for="phone">Phone</label></th>
+            <th><label for="email">Email</label></th>
+            <th><label for="rating">Rating</label></th>
+            <th><label for="totalJobsCompleted">Total Jobs Completed</label></th>
+            <th></th> <!-- Empty header cell for the submit button -->
+        </tr>
+        <tr>
+            <td><input type="text" id="companyName" name="companyName" required></td>
+            <td><input type="text" id="phone" name="phone" required></td>
+            <td><input type="email" id="email" name="email" required></td>
+            <td>
+                <select id="rating" name="rating" required>
+                    <option value="-">-</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="F">F</option>
+                </select>
+            </td>
+            <td><input type="number" id="totalJobsCompleted" name="totalJobsCompleted" required></td>
+            <td><input type="submit" value="Add Contractor"></td>
+        </tr>
+    </table>
+</form>
+{% endblock %}

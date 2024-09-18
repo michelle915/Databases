@@ -1,0 +1,83 @@
+{% extends "index.html" %}
+
+{% block content %}
+<h2>Invoices</h2>
+<p>This page records fence sale invoices, which include customers, salesmen, and assigned contractors.</p>
+<table>
+    <thead>
+        <tr>
+            <th>Invoice ID</th>
+            <th>Customer Name</th>
+            <th>Salesman Name</th>
+            <th>Contractor Name</th>
+            <th>Invoice Date</th>
+            <th>Total Due</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for invoice in invoices %}
+        <tr>
+            <td>{{ invoice.InvoiceID }}</td>
+            <td>{{ invoice.CustomerName }}</td>
+            <td>{{ invoice.SalesmanName }}</td>
+            <td>{{ invoice.ContractorName or "None" }}</td>
+            <td>{{ invoice.InvoiceDate }}</td>
+            <td>{{ invoice.TotalDue or "0.00"}}</td>
+            <td>
+                <a href="{{ url_for('update_invoice', id=invoice.InvoiceID) }}">Edit</a>
+            </td>
+            <td>
+                <form action="/invoices/delete" method="POST">
+                    <input type="hidden" name="InvoiceID" value="{{ invoice.InvoiceID }}">
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Create a New Invoice</h3>
+<p>Create a new invoice and then hop over to Invoice Details to add line items to that invoice.</p>
+<form method="POST">
+    <table>
+        <tr>
+            <th><label for="customerID">Customer</label></th>
+            <th><label for="salesmanID">Salesman</label></th>
+            <th><label for="contractorID">Contractor (optional)</label></th>
+            <th><label for="invoiceDate">Invoice Date</label></th>
+            <!-- <th><label for="totalDue">Total Due</label></th> -->
+            <th></th>
+        </tr>
+        <tr>
+            <td>
+                <select name="customerID" id="customerID" required>
+                    {% for customer in customers %}
+                    <option value="{{ customer.CustomerID }}">{{ customer.Name }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                <select name="salesmanID" id="salesmanID" required>
+                    {% for salesman in salesmen %}
+                    <option value="{{ salesman.SalesmanID }}">{{ salesman.Name }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                <select name="contractorID" id="contractorID">
+                    <option value="">None</option>
+                    {% for contractor in contractors %}
+                    <option value="{{ contractor.ContractorID }}">{{ contractor.CompanyName }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td><input type="date" id="invoiceDate" name="invoiceDate" required></td>
+            <!-- <td><input type="number" id="totalDue" name="totalDue" required></td> -->
+            <td><input type="submit" value="Add Invoice"></td>
+        </tr>
+    </table>
+</form>
+{% endblock %}

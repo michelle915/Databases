@@ -1,0 +1,163 @@
+/*   ----- Imports  -----  */
+@import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Roboto+Condensed&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+    
+
+/*   ----- Variables  -----  */
+:root {
+  --white: #ffffff;
+  --black: #000000;
+  --h2: #34598c;
+  --h3: #5b7aa6;
+  --h4: #ec7377;
+  --tables: #939393;
+}
+
+/*  ----- Viewport ----- elements inherited by all remaining elements ----- */
+body {       /* Can alternatively define in html {} or :root {} */
+background-attachment: fixed;
+background-color: var(--black);
+background-position: top left;
+background-repeat: no-repeat;
+background-size: cover;
+margin: 0%;
+padding: 0%; 
+max-width: 100%;   
+color: var(--black);
+font-family: 'Roboto', sans-serif; /* Define with at least one font name and its related generic family name.*/
+line-height:1.2;
+}
+
+/*  ----- Page layout blocks -----  */
+header, footer {
+background-color: var(--black);
+color: var(--white);
+
+}
+
+header {
+text-align: center;
+padding: .5%;
+margin-top: 0%;
+margin-bottom: -3%;      
+}
+
+footer {
+text-align: center;
+padding: 1%;
+bottom: 0;  
+width: 100%;
+}
+
+main {
+background-color: var(--white);
+color: var(--black);
+margin: 5%;
+padding: 5%;
+}
+/*
+section {}
+  article {}
+    #topic1 {}
+    #topic2 {}
+div {}
+aside {}
+*/
+
+/* ----- Anchors ----- Text links */
+/*a {}
+a:link {}
+a:hover {}
+a:active {}
+a:visited {}
+*/
+
+/*  ----- Navigation ----- Override text links for navigation only.  */
+.nav {
+  display: flex;
+  justify-content: center;
+  background-color: var(--black);
+}
+/* Style the individual links inside the nav bar */
+.nav a {
+  display: inline-block;
+  padding: 5px 2vw;
+  margin: 10px;
+  margin-bottom: 10px;
+  color: var(--white);
+  font-size: calc(.5rem + 1vw);
+  text-decoration: none;
+}
+/* Style the hover state of the individual links */
+.nav a:hover {
+  border: 3px solid var(--white);
+  color: var(--white);
+  border-radius: 0;
+}
+
+
+/*  -----  Typography  ----- */
+/*
+p {}
+br {}
+ol, ul, dl {}
+li {}
+dt {}
+dd {}
+*/
+
+h1 {
+font-family: 'Julius Sans One', sans-serif;
+font-size: calc(.5rem + 5vw);
+} 
+h2, h3, h4, h5, h6 {
+font-family: 'Roboto Condensed', sans-serif;
+} 
+h2 {
+color: var(--h2);
+} 
+h3, h4, h5, h6 {
+color: var(--h3);
+} 
+
+/*  ----- Table ----- */
+table {
+border-collapse: collapse;
+width: 100%;
+color: var(--tables);
+}
+
+caption {
+font-size: 1.5rem;
+font-weight: bold;
+margin: 1rem 0;
+color: var(--tables);
+}
+
+th, td {
+border: 1px solid var(--tables);
+text-align: center;
+padding: 10px;
+}
+
+th {
+background-color: var(--tables);
+color: var(--white);
+
+}
+
+td {
+color: var(--black);
+}
+
+
+@keyframes App-logo {}
+
+/*   ===== TABLET  media query overrides mobile styles ===== */
+@media all and (min-width: 600px) {}
+
+/*   ===== DESKTOP  media query overrides mobile and tablet styles ===== */
+@media all and (min-width: 1080px) {}
+
+/*   ===== PRINT  media query overrides previous styles =====  */
+@media print {}
+

@@ -1,0 +1,48 @@
+
+{% extends "index.html" %}
+
+{% block content %}
+<h2>Fences</h2>
+<p>This page records the details of fences offered to customers.</p>
+<table>
+    <thead>
+        <tr>
+            <!-- <th>FenceID</th> -->
+            <th>Fence</th>
+            <th>List Price Per Meter</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for fence in fences %}
+        <tr>
+            <!-- <td>{{ fence.FenceID }}</td> -->
+            <td>{{ fence.Description }}</td>
+            <td>{{ fence.ListPricePerMeter }}</td>
+            <td>
+                <form action="/fences/delete" method="POST">
+                    <input type="hidden" name="FenceID" value="{{ fence.FenceID }}">
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Add a New Fence Type</h3>
+<form method="POST">
+    <table>
+        <tr>
+            <th><label for="description">Fence</label></th>
+            <th><label for="listPricePerMeter">List Price Per Meter</label></th>
+            <th></th>
+        </tr>
+        <tr>
+            <td><input type="text" id="description" name="description" required></td>
+            <td><input type="number" id="listPricePerMeter" name="listPricePerMeter" required></td>
+            <td><input type="submit" value="Add Fence"></td>
+        </tr>
+    </table>
+</form>
+{% endblock %}

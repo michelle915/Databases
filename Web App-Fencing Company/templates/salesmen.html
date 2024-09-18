@@ -1,0 +1,60 @@
+{% extends "index.html" %}
+
+{% block content %}
+<h2>Salesmen</h2>
+<p>This page records the details of the employee who sold a fence order.</p>
+<table>
+    <thead>
+        <tr>
+            <!-- <th>SalesmanID</th> -->
+            <th>Name</th>
+            <th>Number Of Sales</th>
+            <th>Rating</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for salesman in salesmen %}
+        <tr>
+            <!-- <td>{{ salesman.SalesmanID }}</td> -->
+            <td>{{ salesman.Name }}</td>
+            <td>{{ salesman.NumberOfSales }}</td>
+            <td>{{ salesman.Rating }}</td>
+            <td>
+                <form action="/salesmen/delete" method="POST">
+                    <input type="hidden" name="SalesmanID" value="{{ salesman.SalesmanID }}">
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Add a New Salesman</h3>
+<form method="POST">
+    <table>
+        <tr>
+            <th><label for="name">Name</label></th>
+            <th><label for="numberOfSales">Number of Sales</label></th>
+            <th><label for="rating">Rating</label></th>
+            <th></th> <!-- Empty header cell for the submit button -->
+        </tr>
+        <tr>
+            <td><input type="text" id="name" name="name" required></td>
+            <td><input type="number" id="numberOfSales" name="numberOfSales" min="0" required></td>
+            <td>
+                <select id="rating" name="rating" required>
+                    <option value="-">-</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="F">F</option>
+                </select>
+            </td>
+            <td><input type="submit" value="Add Salesman"></td>
+        </tr>
+    </table>
+</form>
+{% endblock %}

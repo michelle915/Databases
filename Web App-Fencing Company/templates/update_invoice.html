@@ -1,0 +1,50 @@
+{% extends "index.html" %}
+
+{% block content %}
+<h2>Edit Invoice</h2>
+<form action="/update_invoice/{{ invoice.InvoiceID }}" method="POST">
+    <table>
+        <tr>
+            <th><label for="customerID">Customer</label></th>
+            <th><label for="salesmanID">Salesman</label></th>
+            <th><label for="contractorID">Contractor</label></th>
+            <th><label for="invoiceDate">Invoice Date</label></th>
+            <th><label for="totalDue">Total Due</label></th>
+            <th></th> <!-- Empty header cell for the submit button -->
+        </tr>
+        <tr>
+            <td>
+                <select name="customerID" id="customerID" required>
+                    {% for customer in customers %}
+                    <option value="{{ customer.CustomerID }}"
+                    {% if customer.CustomerID == invoice.CustomerID %} selected {% endif %}>
+                    {{ customer.Name }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                <select name="salesmanID" id="salesmanID" required>
+                    {% for salesman in salesmen %}
+                    <option value="{{ salesman.SalesmanID }}"
+                    {% if salesman.SalesmanID == invoice.SalesmanID %} selected {% endif %}>
+                    {{ salesman.Name }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                <select name="contractorID" id="contractorID">
+                    <option value="">None</option>
+                    {% for contractor in contractors %}
+                    <option value="{{ contractor.ContractorID }}"
+                    {% if contractor.ContractorID == invoice.ContractorID %} selected {% endif %}>
+                    {{ contractor.CompanyName }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td><input type="date" id="invoiceDate" name="invoiceDate" required value="{{ invoice.InvoiceDate }}"></td>
+            <td><input type="text" id="totalDue" name="totalDue" required value="{{ invoice.TotalDue }}"></td>
+            <td><input type="submit" value="Update Invoice"></td>
+        </tr>
+    </table>
+</form>
+{% endblock %}

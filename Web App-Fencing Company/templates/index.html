@@ -1,0 +1,36 @@
+<html>
+<head>
+    <title>Loya Fencing</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Loya Fencing</h1>
+    </header>
+    <nav class="nav">
+        <a href="/">Home</a>
+        <a href="/customers">Customers</a>
+        <a href="/salesmen">Salesmen</a>
+        <a href="/contractors">Contractors</a>
+        <a href="/fences">Fences</a>
+        <a href="/invoices">Invoices</a>
+        <a href="/InvoiceDetails">Invoice Details</a>
+    </nav>
+    <main>
+        {% block content %}
+        <h2>Website Prototype</h2>
+        <p>
+            Last year, Loya Fencing invoiced $2.5 million in fence sales. Loya Fencing focuses on discovering clients, selling fences, and customer satisfaction. 
+            Once a customer pays the deposit for a fence, Loya Fencing will assign the construction of the fence to one of the many construction contractors that 
+            they partner with. The company needs a means to keep track of sales data as it continues growing. This data would serve a variety of purposes, including 
+            calculating earnings, taxes, and general business intelligence. Additionally, a database would provide a far more robust structure rather than using paper 
+            (an improvement in record keeping) and provide improved accessibility. A database-driven website will record Invoices of Fences sold by Loya Fencing’s team 
+            of Salesmen to their Customers. The database will also track the Contractors assigned by Loya Fencing to construct/install the purchased fences.
+        </p>
+        {% endblock %}
+    </main>    
+</body>
+<footer>
+    <p>Loya Inc &copy; 2023</p>
+</footer>
+</html>

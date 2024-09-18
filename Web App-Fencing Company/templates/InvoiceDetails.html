@@ -1,0 +1,74 @@
+{% extends "index.html" %}
+
+{% block content %}
+<h2>Invoice Details</h2>
+<p>This page records the details of each fence sale, including type, quantity, and cost.</p>
+<table>
+    <thead>
+        <tr>
+            <!-- <th>InvoiceDetailsID</th> -->
+            <th>Invoice ID</th>
+            <!-- <th>FenceID</th> -->
+            <th>Fence</th> 
+            <th>Meters Ordered</th>
+            <th>Unit Price Per Meter</th>
+            <th>Line Total</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for invoiceDetail in invoice_details %}
+        <tr>
+            <!-- <td>{{ invoiceDetail.InvoiceDetailsID }}</td> -->
+            <td>{{ invoiceDetail.InvoiceID }}</td>
+            <!-- <td>{{ invoiceDetail.FenceID }}</td> -->
+            <td>{{ invoiceDetail.Description }}</td>
+            <td>{{ invoiceDetail.MetersOrdered }}</td>
+            <td>{{ invoiceDetail.UnitPricePerMeter }}</td>
+            <td>{{ invoiceDetail.LineTotal }}</td>
+            <td>
+                <form action="/invoiceDetails/delete" method="POST">
+                    <input type="hidden" name="InvoiceDetailsID" value="{{ invoiceDetail.InvoiceDetailID }}">
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Add New Line Item to an Invoice</h3>
+<form method="POST">
+    <table>
+        <tr>
+            <th><label for="invoiceID">Invoice ID</label></th>
+            <th><label for="fenceID">Fence Description</label></th>
+            <th><label for="metersOrdered">Meters Ordered</label></th>
+            <!-- <th><label for="unitPricePerMeter">Unit Price Per Meter</label></th> -->
+            <!-- <th><label for="lineTotal">Line Total</label></th> -->
+            <th></th>
+        </tr>
+        <tr>
+            <td>
+                <select name="invoiceID" id="invoiceID" required>
+                    {% for invoice in invoices %}
+                    <option value="{{ invoice.InvoiceID }}">{{ invoice.InvoiceID }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                <select name="fenceID" id="fenceID" required>
+                    {% for fence in fences %}
+                    <option value="{{ fence.FenceID }}">{{ fence.Description }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td><input type="number" id="metersOrdered" name="metersOrdered" required></td>
+            <!-- <td><input type="number" id="unitPricePerMeter" name="unitPricePerMeter" required></td> -->
+            <!-- <td><input type="text" id="lineTotal" name="lineTotal" required></td> -->
+            <td><input type="submit" value="Add Details"></td>
+        </tr>
+    </table>
+</form>
+{% endblock %}
+

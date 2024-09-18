@@ -1,0 +1,99 @@
+{% extends "index.html" %}
+
+{% block content %}
+<h2>Add Invoice</h2>
+
+<!-- Table displaying the invoice details being added -->
+<h3>Current Invoice Details</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Invoice ID</th>
+            <th>Fence Description</th>
+            <th>Meters Ordered</th>
+            <th>Unit Price Per Meter</th>
+            <th>Line Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for detail in current_invoice_details %}
+        <tr>
+            <td>{{ detail.InvoiceID }}</td>
+            <td>{{ detail.Description }}</td>
+            <td>{{ detail.MetersOrdered }}</td>
+            <td>{{ detail.UnitPricePerMeter }}</td>
+            <td>{{ detail.LineTotal }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<form method="POST" action="{{ url_for('submit_invoice') }}">
+    <!-- Invoice Info -->
+    <h3>Invoice Information</h3>
+    <table>
+        <tr>
+            <th><label for="customerID">Customer</label></th>
+            <th><label for="salesmanID">Salesman</label></th>
+            <th><label for="contractorID">Contractor (optional)</label></th>
+            <th><label for="invoiceDate">Invoice Date</label></th>
+            <th><label for="totalDue">Total Due</label></th>
+        </tr>
+        <tr>
+            <td>
+                <select name="customerID" id="customerID" required>
+                    {% for customer in customers %}
+                    <option value="{{ customer.CustomerID }}">{{ customer.Name }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                <select name="salesmanID" id="salesmanID" required>
+                    {% for salesman in salesmen %}
+                    <option value="{{ salesman.SalesmanID }}">{{ salesman.Name }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                <select name="contractorID" id="contractorID">
+                    <option value="">None</option>
+                    {% for contractor in contractors %}
+                    <option value="{{ contractor.ContractorID }}">{{ contractor.CompanyName }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td><input type="date" id="invoiceDate" name="invoiceDate" required></td>
+            <td><input type="number" id="totalDue" name="totalDue" required></td>
+        </tr>
+    </table>
+
+    <!-- Invoice Details -->
+    <h3>Invoice Details</h3>
+    <table>
+        <tr>
+            <th><label for="fenceID">Fence Description</label></th>
+            <th><label for="metersOrdered">Meters Ordered</label></th>
+            <th><label for="unitPricePerMeter">Unit Price Per Meter</label></th>
+            <th><label for="lineTotal">Line Total</label></th>
+        </tr>
+        <tr>
+            <td>
+                <select name="fenceID" id="fenceID" required>
+                    {% for fence in fences %}
+                    <option value="{{ fence.FenceID }}">{{ fence.Description }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td><input type="text" id="metersOrdered" name="metersOrdered" required></td>
+            <td><input type="text" id="unitPricePerMeter" name="unitPricePerMeter" required></td>
+            <td><input type="text" id="lineTotal" name="lineTotal" required></td>
+        </tr>
+    </table>
+    
+    <!-- Submit Button -->
+    <div>
+        <input type="submit" value="Submit Invoice">
+    </div>
+</form>
+
+{% endblock %}
